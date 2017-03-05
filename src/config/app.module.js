@@ -7,11 +7,14 @@
 angular.module('coin', [
 		'ui.router',
 		'firebase',
-		'ui.materialize'
+		'ui.materialize',
+    'angular-loading-bar'
 	])
-.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'cfpLoadingBarProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
 	$urlRouterProvider.otherwise('/');
 	$locationProvider.hashPrefix('');
+
+  cfpLoadingBarProvider.includeSpinner = true;
 
 	$stateProvider
 		.state('app', {
@@ -89,7 +92,7 @@ angular.module('coin', [
       }
     })
 }])
-.run(["$rootScope", "$state", function($rootScope, $state) {
+.run(["$rootScope", "$state", 'Auth', function($rootScope, $state, Auth) {
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireSignIn promise is rejected
     // and redirect the user back to the home page
@@ -98,8 +101,8 @@ angular.module('coin', [
     }
   });
   $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
-    if(toState.public === true){
-      $state.go('app.dashboard')
+    if(toState.public === true && Auth.$getAuth() != null){
+      e.preventDefault();
     }
   });
 }])
@@ -128,6 +131,8 @@ function preventClickDirective() {
 
 NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth'];
 function NavbarController($rootScope, $scope, $state, Auth) {
+
+    $scope.user = Auth;
     $scope.openModal = false;
 
      Auth.$onAuthStateChanged(function($firebaseUser) {

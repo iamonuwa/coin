@@ -1,27 +1,24 @@
 <div class="navbar-fixed" ng-controller="navbarController as navbarCtrl">
     <nav>
-      <div class="container nav-wrapper">
-        <a ui-sref="app.index" class="brand-logo">Logo</a>
-          <a href="#" data-activates="nav-mobile" class="button-collapse" data-sidenav="left"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li ng-show="loggedIn"><a class="waves-effect waves-light" ui-sref="app.buy">Buy</a></li>
-            <li ng-show="loggedIn"><a class="waves-effect waves-light" ng-click="logout()">Sign Out</a></li>
-            <li ng-show="!loggedIn"><a class="waves-effect waves-light" ui-sref="app.signin">Sign In</a></li>
-            <li ng-show="!loggedIn"><a ui-sref="app.register" class="waves-effect waves-light">Sign Up</a></li>
-          </ul>
           <ul class="side-nav" id="nav-mobile">
             <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Buy Coins</a></li>
-          	<li ng-show="loggedIn"><a class="waves-effect waves-teal" ng-click="logout()">Sign Out</a></li>
-          	<li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="app.signin">Sign In</a></li>
-          	<li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="app.register">Sign Up</a></li>
+            <li ng-show="loggedIn"><a class="waves-effect waves-teal" ng-click="logout()">Sign Out</a></li>
+            <li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="app.signin">Sign In</a></li>
+            <li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="app.register">Sign Up</a></li>
+          </ul>
+          <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-menuwidth="240" data-closeonclick="false"><i class="material-icons">menu</i></a>
+      <div class="container nav-wrapper">
+        <a ui-sref="app.index" class="brand-logo">Logo</a>
+          <ul class="right hide-on-med-and-down">
+            <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.buy">Buy</a></li>
+            <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ng-click="logout()">Sign Out</a></li>
+            <li ng-show="!loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.signin">Sign In</a></li>
+            <li ng-show="!loggedIn" ui-sref-active="active"><a ui-sref="app.register" class="waves-effect waves-light">Sign Up</a></li>
           </ul>
       </div>
     </nav>
 </div>
-
     <ui-view></ui-view>
-
-
         <footer class="page-footer">
           <div class="container">
             <div class="row">
