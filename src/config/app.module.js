@@ -49,6 +49,20 @@ angular.module('coin', [
         }]
       }
     })
+    .state('app.profile', {
+      url: '/u/:id',
+      templateUrl: 'views/profile.views.client.html',
+      pageTitle: 'Modify Account',
+      public: false,
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$requireSignIn();
+        }]
+      }
+    })
     .state('app.buy', {
       url: '/buy',
       templateUrl: 'views/buy.views.client.html',
@@ -129,14 +143,18 @@ function preventClickDirective() {
   return directive;
 }
 
-NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth'];
-function NavbarController($rootScope, $scope, $state, Auth) {
+NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth', 'DatabaseRef'];
+function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef) {
 
-    $scope.user = Auth;
     $scope.openModal = false;
 
      Auth.$onAuthStateChanged(function($firebaseUser) {
       if ($firebaseUser != null) {
+        $scope.uid = $firebaseUser.uid;
+        var item = DatabaseRef.child('users').child($scope.uid);
+        item.once('value').then(function (snapshot) {
+          $scope.user = snapshot.val().displayName;
+        })
         $scope.loggedIn = true;
       } else {
         $scope.loggedIn = false;
