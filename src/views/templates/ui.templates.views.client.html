@@ -1,21 +1,51 @@
-
-    <nav ng-controller="navbarController as navbar">
+<div class="navbar-fixed" ng-controller="navbarController as navbarCtrl">
+    <nav>
       <div class="container nav-wrapper">
         <a ui-sref="app.index" class="brand-logo">Logo</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <a href="#" data-activates="nav-mobile" class="button-collapse" data-sidenav="left"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+            <li ng-show="loggedIn"><a class="waves-effect waves-light" ui-sref="app.buy">Buy</a></li>
+            <li ng-show="loggedIn"><a class="waves-effect waves-light" ng-click="logout()">Sign Out</a></li>
+            <li ng-show="!loggedIn"><a class="waves-effect waves-light" ui-sref="app.signin">Sign In</a></li>
+            <li ng-show="!loggedIn"><a ui-sref="app.register" class="waves-effect waves-light">Sign Up</a></li>
           </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+          <ul class="side-nav" id="nav-mobile">
+            <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Buy Coins</a></li>
+          	<li ng-show="loggedIn"><a class="waves-effect waves-teal" ng-click="logout()">Sign Out</a></li>
+          	<li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="app.signin">Sign In</a></li>
+          	<li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="app.register">Sign Up</a></li>
           </ul>
       </div>
     </nav>
+</div>
 
     <ui-view></ui-view>
+
+
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+            
+

@@ -3,17 +3,21 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="assets/styles/materialize.css"  media="screen,projection"/>
-      <title ng-bind="'Coin Exchange - ' + $state.pageTitle">Coin Exchange</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+      <title ng-bind="'Coin Exchange ' + $state.pageTitle">Coin Exchange</title>
     </head>
 
     <body>
+    
     <ui-view></ui-view>
 
-      <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+
+
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="assets/vendor/angular/angular.js"></script>
       <script src="assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
-      <script src="assets/scripts/bin/materialize.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
 
       <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
       <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>

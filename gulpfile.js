@@ -19,7 +19,8 @@
 	        server: "src/"
 	    });
 
-	    gulp.watch('src/assets/css/**/*.scss', ['sass']);
+	    gulp.watch('src/assets/sass/components/*.scss', ['sass']);
+	    gulp.watch('src/assets/sass/components/*.scss').on('change', browserSync.reload);;
 	    gulp.watch('src/index.html').on('change', browserSync.reload);
 	    gulp.watch('src/config/app.module.js').on('change', browserSync.reload);
 
