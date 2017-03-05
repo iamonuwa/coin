@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+  <html ng-app="coin">
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="assets/styles/materialize.css"  media="screen,projection"/>
+      <title ng-bind="'Coin Exchange - ' + $state.pageTitle">Coin Exchange</title>
+    </head>
+
+    <body>
+    <ui-view></ui-view>
+
+      <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+      <script src="assets/vendor/angular/angular.js"></script>
+      <script src="assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="assets/scripts/bin/materialize.min.js"></script>
+
+      <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+      <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyBIaUOWVjgtVcz1qp3FCoApGdytoHyiCHs",
+          authDomain: "coin-f55a3.firebaseapp.com",
+          databaseURL: "https://coin-f55a3.firebaseio.com",
+          storageBucket: "coin-f55a3.appspot.com",
+          messagingSenderId: "805707518666"
+        };
+        firebase.initializeApp(config);
+
+
+      $(".button-collapse").sideNav();
+        
+      </script>
+
+      <script src="config/app.module.js"></script>
+    </body>
+  </html>

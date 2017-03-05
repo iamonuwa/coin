@@ -1,0 +1,23 @@
+{
+  "name": "coin",
+  "description": "Money Exchange Automation Solution",
+  "main": "gulpfile.js",
+  "authors": [
+    "Onuwa Nnachi Isaac <matrix4u2002@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-ui-router": "^0.4.2",
+    "jquery": "^3.0.0"
+  }
+}
