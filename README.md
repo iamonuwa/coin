@@ -1,0 +1,2 @@
+# coin
+Buy Bitcoins here!
