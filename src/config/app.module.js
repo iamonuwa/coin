@@ -151,7 +151,7 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef) {
      Auth.$onAuthStateChanged(function($firebaseUser) {
       if ($firebaseUser != null) {
         $scope.uid = $firebaseUser.uid;
-        var item = DatabaseRef.child('users').child($scope.uid);
+        var item = DatabaseRef.child('users').child($firebaseUser.uid);
         item.once('value').then(function (snapshot) {
           $scope.user = snapshot.val().displayName;
         })
