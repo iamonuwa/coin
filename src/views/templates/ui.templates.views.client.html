@@ -8,8 +8,7 @@
           </ul>
           <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-menuwidth="240" data-closeonclick="false"><i class="material-icons">menu</i></a>
       <div class="container nav-wrapper">
-        <a ng-if="!loggedIn" ui-sref="app.index" class="brand-logo">Logo</a>
-        <a ng-if="loggedIn" ui-sref="app.dashboard" class="brand-logo">Logo</a>
+        <a ui-sref="app.index" class="brand-logo">Logo</a>
           <ul class="right hide-on-med-and-down">
             <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.buy">Buy</a></li>
             <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
@@ -41,8 +40,8 @@
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            © 2016 Coin Exchange
+            <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
             </div>
           </div>
         </footer>
