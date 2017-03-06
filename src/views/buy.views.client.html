@@ -1,9 +1,72 @@
-<!-- <div class="parallax-container">
-    <div class="parallax"><img src="assets/images/index.jpeg"></div>
-</div> -->
-<div class="section white">
-	<div class="row container">
-	  <h2 class="header">Parallax</h2>
-	  <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
-	</div>
+<div class="section">
+	<main ng-controller="registerController as registerCtrl">
+	    <center>
+	      <div class="section"></div>
+	      <h5 class="indigo-text">Apply to be funded!</h5>
+	      <div class="section"></div>
+
+	      <div class="container">
+	        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+	          <form class="col s12" ng-submit="create_account()">
+	            <div class='row'>
+	              <div class='input-field col s12 m4 l4'>
+	                <input type='text' ng-model="firstname" />
+	                <label for='firstname'>Firstname</label>
+	              </div>
+	              <div class='input-field col s12 m4 l4'>
+	                <input type='text' ng-model="lastname" />
+	                <label for='lastname'>Surname</label>
+	              </div>
+	              <div class='input-field col s12 m4 l4'>
+	                <input type='text' ng-model="othername" />
+	                <label for='othername'>Othername</label>
+	              </div>
+	            </div>
+	            <div class='row'>
+	              <div class='input-field col s12 m6 l6'>
+	                <input type='email' ng-model="email" />
+	                <label for='email'>Email Address</label>
+	              </div>
+	              <div class='input-field col s12 m6 l6'>
+	                <input type='tel' ng-model="phone" />
+	                <label for='phone'>Phone Number</label>
+	              </div>
+	            </div>
+	            <div class='row'>
+	              <div class='input-field col s12 m6 l6'>
+	                <input type='password' ng-model="password" />
+	                <label for='password'>Password</label>
+	              </div>
+	              <div class='input-field col s12 m6 l6'>
+	                <input type='password' ng-model="confirm_password" />
+	                <label for='password'>Confirm Password</label>
+	              </div>
+	            </div>
+	            <div class='row'>
+	              <div class='input-field col s12 m4 l4'>
+	                <select ng-model="bank" material-select watch>
+				        <option>Access Bank</option>
+				    </select>
+	                <label for='bank'>Bank Name</label>
+	              </div>
+	              <div class='input-field col s12 m4 l4'>
+	                <input type='text' ng-model="accountName" />
+	                <label for='accountName'>Account Name</label>
+	              </div>
+	              <div class='input-field col s12 m4 l4'>
+	                <input type='text' ng-model="accountNumber" />
+	                <label for='accountNumber'>Account Number</label>
+	              </div>
+	            </div>
+	            <center>
+	              <div class='row'>
+	                <button type='submit' class='col s12 btn btn-large waves-effect green'>Fund</button>
+	              </div>
+	            </center>
+	          </form>
+	        </div>
+	      </div>
+	    </center>
+	</main>
 </div>

@@ -130,6 +130,7 @@ angular.module('coin', [
 .controller('navbarController', NavbarController)
 .controller('loginController', LoginController)
 .controller('registerController', RegisterController)
+.controller('buyController', BuyController)
 
 .directive('a', preventClickDirective)
 .factory("Auth", ['$firebaseAuth', function($firebaseAuth) {
@@ -194,11 +195,11 @@ function LoginController($scope, $state, $firebaseAuth) {
       auth.$signInWithEmailAndPassword($scope.email, $scope.password).then(function (response) {
         if(response.emailVerified){
             Materialize.toast("Welcome "+ response.displayName , 3000);
-              $state.go('app.dashboard');
+              $state.go('app.index');
         }
         else{
           Materialize.toast("Welcome " + response.displayName + ", Please verify your account.", 3000);
-          $state.go('app.dashboard');
+          $state.go('app.index');
         }
       }).catch(function (error) {
         Materialize.toast(error.message, 3000);
@@ -242,11 +243,16 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef) {
                     });
             $firebaseUser.sendEmailVerification();
             Materialize.toast("Your account has been created! Please check your mail to verify your account", 3000);
-            $state.go('app.dashboard');
+            $state.go('app.index');
           }, function (error) {
             Materialize.toast(error, 3000);
           })
         })
     }
   }
+}
+
+BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject'];
+function BuyController($scope, DatabaseRef, $firebaseObject) {
+  
 }
