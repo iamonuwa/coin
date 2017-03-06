@@ -29,6 +29,7 @@ gulp
 ## Credits
 
 * **Onuwa Nnachi Isaac** - [twitter](https://twitter.com/iamonuwa) , [facebook](https://facebook.com/iamonuwa) , [github](https://github.com/iamonuwa)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
