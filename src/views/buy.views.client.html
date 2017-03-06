@@ -1,71 +1,95 @@
 <div class="section">
-	<main ng-controller="registerController as registerCtrl">
+	<main ng-controller="buyController as buyCtrl">
 	    <center>
-	      <div class="section"></div>
-	      <h5 class="indigo-text">Apply to be funded!</h5>
+	  <div class="section"></div>
+  	<div class="indigo-text">
+  		<button class="waves-effect waves-block btn" ng-click="exchange = !exchange">
+	  		{{ toggle_application_btn }}
+  		</button>
+	</div>
 	      <div class="section"></div>
 
 	      <div class="container">
-	        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-	          <form class="col s12" ng-submit="create_account()">
-	            <div class='row'>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="firstname" />
-	                <label for='firstname'>Firstname</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="lastname" />
-	                <label for='lastname'>Surname</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="othername" />
-	                <label for='othername'>Othername</label>
-	              </div>
-	            </div>
-	            <div class='row'>
-	              <div class='input-field col s12 m6 l6'>
-	                <input type='email' ng-model="email" />
-	                <label for='email'>Email Address</label>
-	              </div>
-	              <div class='input-field col s12 m6 l6'>
-	                <input type='tel' ng-model="phone" />
-	                <label for='phone'>Phone Number</label>
-	              </div>
-	            </div>
-	            <div class='row'>
-	              <div class='input-field col s12 m6 l6'>
-	                <input type='password' ng-model="password" />
-	                <label for='password'>Password</label>
-	              </div>
-	              <div class='input-field col s12 m6 l6'>
-	                <input type='password' ng-model="confirm_password" />
-	                <label for='password'>Confirm Password</label>
-	              </div>
-	            </div>
-	            <div class='row'>
-	              <div class='input-field col s12 m4 l4'>
-	                <select ng-model="bank" material-select watch>
-				        <option>Access Bank</option>
-				    </select>
-	                <label for='bank'>Bank Name</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="accountName" />
-	                <label for='accountName'>Account Name</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="accountNumber" />
-	                <label for='accountNumber'>Account Number</label>
-	              </div>
-	            </div>
-	            <center>
-	              <div class='row'>
-	                <button type='submit' class='col s12 btn btn-large waves-effect green'>Fund</button>
-	              </div>
-	            </center>
-	          </form>
-	        </div>
+			<div ng-show="exchange">
+				<h4>Currency Exchange Form</h4>
+			        <div class="row">
+			        	<div class="col s12 m6 l6">
+			        		<div input-field>
+							    <select ng-model="selling_currencies" material-select watch>
+								    <option ng-repeat="value in money">{{value}}</option>
+							    </select>
+							    <label>Selling</label>
+							</div>
+			        	</div>
+			        	<div class="col s12 m6 l6">
+			        		<div input-field>
+							    <select ng-model="buying_currencies" material-select watch>
+							    	<option ng-repeat="value in money">{{value}}</option>
+							    </select>
+							    <label>Buying</label>
+							</div>
+			        	</div>
+			        	<div class="row">
+				        	<div class="col s12 m6 l6">
+				        		<div input-field>
+								    <div input-field>
+									    <input type="text" ng-model="quantity">
+									    <label>Worth</label>
+									</div>
+								</div>
+				        	</div>
+				        	<div class="col s12 m6 l6">
+				        		<div input-field>
+								    <div input-field>
+									    <input type="text" ng-bind="quantity" ng-model="result" disabled>
+									    <label>Amount to Buy</label>
+									</div>
+								</div>
+				        	</div>
+				        </div>
+				        <div class="row">
+				        	<div class="col s12 m6 l4">
+				        		<div input-field>
+								    <div input-field>
+									    <input type="text" ng-model="bankName" >
+									</div>
+								</div>
+				        	</div>
+				        	<div class="col s12 m6 l4">
+				        		<div input-field>
+								    <div input-field>
+									    <input type="text" ng-model="accountNumber">
+									</div>
+								</div>
+				        	</div>
+				        	<div class="col s12 m6 l4">
+				        		<div input-field>
+								    <div input-field>
+									    <input type="text" ng-model="accountName">
+									</div>
+								</div>
+				        	</div>
+				        </div>
+			        </div>
+			</div>
+			<div class="row" ng-init="getMyApplications()">
+				<div class="col s12 m6 l4" ng-show="applications == null">
+					<div class="card">
+					    <div class="card-image waves-effect waves-block waves-light">
+					      <img class="activator" src="assets/images/transaction_not_found.png">
+					    </div>
+					    <!-- <div class="card-content">
+					      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+					      <p class="right"><a href="#">This is a link</a></p>
+					    </div>
+					    <div class="card-reveal">
+					      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+					      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+					    </div> -->
+					  </div>
+				</div>
+			</div>
 	      </div>
 	    </center>
 	</main>
