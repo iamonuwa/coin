@@ -28,7 +28,7 @@ gulp
 
 ## Credits
 
-* ** Onuwa Nnachi Isaac ** - [@iamonuwa](https://twitter.com/iamonuwa)
+* **Onuwa Nnachi Isaac** - [@iamonuwa](https://twitter.com/iamonuwa)
 
 ## License
 
