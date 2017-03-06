@@ -252,7 +252,64 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef) {
   }
 }
 
-BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject'];
-function BuyController($scope, DatabaseRef, $firebaseObject) {
+BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth'];
+function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
+  var uid = Auth.$getAuth().uid;
+
+  $scope.exchange = false;
+
+  if($scope.exchange != true){
+    $scope.toggle_application_btn = "Apply for Currency Exchange";
+  }
+  else if($scope.exchange == true) {
+    $scope.toggle_application_btn = "Cancel Application";
+  }
+
+  $scope.getMyApplications = function () {
+      var item = DatabaseRef.child('application').child(uid);
+      item.once('value').then(function (snapshot) {
+        $scope.applications = snapshot.val();
+      })
+  }
+
+  var user = DatabaseRef.child('user').child(uid);
+  user.once('value').then(function (snapshot) {
+    $scope.user = snapshot.val();
+  })
+
+  // $scope.$watch('quantity', function convert(newVal, oldVal) {
+  // });
+
+
+  $scope.money = {
+        naira: "NAIRA", 
+        btc: "BTC", 
+        payza: "PAYZA", 
+        perfect_money: "PERFECT MONEY", 
+        web_money: "WEB MONEY", 
+        paypal: "PAYPAL"
+  };
+
+  $scope.apply = function () {
+    DatabaseRef.child('application')
+                .child(uid)
+                .set({
+                  selling: $scope.selling,
+                  buying: $scope.buying,
+                  amount: $scope.amount + ' ' + $scope.buying,
+                  accountNumber: $scope.accountNumber,
+                  accountName: $scope.accountName,
+                  bankName: $scope.bankName, 
+                  pic: currency_type($scope.buying)
+                }).then(function () {
+                  Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+                })
+                .catch(function (error) {
+                  Materialize.toast(error, 3000);
+                });
+  }
+}
+
+function currency_type(currency) {
   
 }
