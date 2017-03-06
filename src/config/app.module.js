@@ -216,7 +216,7 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef) {
     $scope.displayName = $scope.lastname + ' ' + $scope.firstname + ' ' + $scope.othername;
 
     if($scope.password !== $scope.confirm_password){
-      Materialize.toast("Passwords do not match.")
+      Materialize.toast("Passwords do not match.", 3000)
     }
     else{
         auth.$createUserWithEmailAndPassword($scope.email, $scope.password).then(function ($firebaseUser) {
@@ -272,15 +272,15 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
       })
   }
 
-  var user = DatabaseRef.child('user').child(uid);
-  user.once('value').then(function (snapshot) {
-    $scope.user = snapshot.val();
-  })
-
-  // $scope.$watch('quantity', function convert(newVal, oldVal) {
-  // });
-
-
+  $scope.loadAccount = function () {
+    var item = DatabaseRef.child('users').child(uid);
+    item.once('value').then(function (snapshot) {
+      $scope.application.bankName = snapshot.val().bankName;
+      $scope.application.accountName = snapshot.val().accountName;
+      $scope.application.accountNumber = snapshot.val().accountNumber;
+    }) 
+  }
+  
   $scope.money = {
         naira: "NAIRA", 
         btc: "BTC", 
@@ -291,22 +291,30 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
   };
 
   $scope.apply = function () {
-    DatabaseRef.child('application')
-                .child(uid)
-                .set({
-                  selling: $scope.selling,
-                  buying: $scope.buying,
-                  amount: $scope.amount + ' ' + $scope.buying,
-                  accountNumber: $scope.accountNumber,
-                  accountName: $scope.accountName,
-                  bankName: $scope.bankName, 
-                  pic: currency_type($scope.buying)
-                }).then(function () {
-                  Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
-                })
-                .catch(function (error) {
-                  Materialize.toast(error, 3000);
-                });
+    var timestamp = new Date().getTime();
+    var data = {
+        uid: uid,
+        selling: $scope.application.selling,
+        buying: $scope.application.buying,
+        units: $scope.application.units,
+        amount: $scope.application.amount + ' ' + $scope.application.buying,
+        accountNumber: $scope.application.accountNumber,
+        accountName: $scope.application.accountName,
+        bankName: $scope.application.bankName, 
+    }
+    var newData = DatabaseRef.child('applications').push().key();
+    console.log(newData);
+    // DatabaseRef.child('application/'+ timestamp)
+    //             .set({
+                  
+    //               // pic: currency_type($scope.buying)
+    //             }).then(function () {
+    //               Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+    //               $scope.exchange = false;
+    //             })
+    //             .catch(function (error) {
+    //               Materialize.toast(error, 3000);
+    //             });
   }
 }
 

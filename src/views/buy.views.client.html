@@ -1,5 +1,5 @@
 <div class="section">
-	<main ng-controller="buyController as buyCtrl">
+	<main ng-controller="buyController">
 	    <center>
 	  <div class="section"></div>
   	<div class="indigo-text">
@@ -11,12 +11,13 @@
 
 	      <div class="container">
 
-			<div ng-show="exchange">
+			<div ng-show="exchange" ng-init="loadAccount()">
 				<h4>Currency Exchange Form</h4>
+				<form ng-submit="apply()" name="application">
 			        <div class="row">
 			        	<div class="col s12 m6 l6">
 			        		<div input-field>
-							    <select ng-model="selling_currencies" material-select watch>
+							    <select ng-model="application.selling" material-select watch>
 								    <option ng-repeat="value in money">{{value}}</option>
 							    </select>
 							    <label>Selling</label>
@@ -24,7 +25,7 @@
 			        	</div>
 			        	<div class="col s12 m6 l6">
 			        		<div input-field>
-							    <select ng-model="buying_currencies" material-select watch>
+							    <select ng-model="application.buying" material-select watch>
 							    	<option ng-repeat="value in money">{{value}}</option>
 							    </select>
 							    <label>Buying</label>
@@ -34,7 +35,7 @@
 				        	<div class="col s12 m6 l6">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="quantity">
+									    <input type="text" ng-model="application.units" required>
 									    <label>Worth</label>
 									</div>
 								</div>
@@ -42,7 +43,7 @@
 				        	<div class="col s12 m6 l6">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-bind="quantity" ng-model="result" disabled>
+									    <input type="text" ng-bind="application.units" ng-model="application.amount" disabled>
 									    <label>Amount to Buy</label>
 									</div>
 								</div>
@@ -52,29 +53,33 @@
 				        	<div class="col s12 m6 l4">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="bankName" >
+									    <input type="text" ng-model="application.bankName" hidden>
 									</div>
 								</div>
 				        	</div>
 				        	<div class="col s12 m6 l4">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="accountNumber">
+									    <input type="text" ng-model="application.accountNumber" hidden>
 									</div>
 								</div>
 				        	</div>
 				        	<div class="col s12 m6 l4">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="accountName">
+									    <input type="text" ng-model="application.accountName" hidden>
 									</div>
 								</div>
 				        	</div>
 				        </div>
 			        </div>
+			        <div class="right">
+			        	<button type="submit" class="waves-effect waves-light waves-block btn">Apply for Exchange</button>
+			        </div>
+				</form>
 			</div>
 			<div class="row" ng-init="getMyApplications()">
-				<div class="col s12 m6 l4" ng-show="applications == null">
+				<div class="col s12 m12 l4" ng-show="applications == null">
 					<div class="card">
 					    <div class="card-image waves-effect waves-block waves-light">
 					      <img class="activator" src="assets/images/transaction_not_found.png">
