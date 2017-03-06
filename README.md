@@ -4,10 +4,10 @@ This platform allows you to trade currencies.
 
 ## Installation
 
-Clone the project form the repository
-Navigate into the project folder
-Run npm install and bower install to install dependencies
-On development environment, serve application with gulp command.
+1. Clone the project form the repository
+2. Navigate into the project folder
+3. Run npm install and bower install to install dependencies
+4. On development environment, serve application with gulp command.
 
 ```
 git clone git@github.com:iamonuwa/coin.git
@@ -28,7 +28,7 @@ gulp
 
 ## Credits
 
-* ** Onuwa Nnachi Isaac ** - [@iamonuwa](https://twitter.com/iamonuwa)
+* **Onuwa Nnachi Isaac** - [@iamonuwa](https://twitter.com/iamonuwa)
 
 ## License
 
