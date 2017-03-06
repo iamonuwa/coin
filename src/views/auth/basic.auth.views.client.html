@@ -1,6 +1,4 @@
-<div class="section">
-	<main ng-controller="registerController as registerCtrl">
-	    <center>
+<center>
 	      <div class="section"></div>
 	      <h5 class="indigo-text">Create new Account</h5>
 	      <div class="section"></div>
@@ -24,13 +22,9 @@
 	              </div>
 	            </div>
 	            <div class='row'>
-	              <div class='input-field col s12 m6 l6'>
+	              <div class='input-field col s12'>
 	                <input type='email' ng-model="email" />
 	                <label for='email'>Email Address</label>
-	              </div>
-	              <div class='input-field col s12 m6 l6'>
-	                <input type='tel' ng-model="phone" />
-	                <label for='phone'>Phone Number</label>
 	              </div>
 	            </div>
 	            <div class='row'>
@@ -45,9 +39,8 @@
 	            </div>
 	            <div class='row'>
 	              <div class='input-field col s12 m6 l6'>
-	                <select class="" ng-model="gender" material-select>
-				        <option value="MALE">MALE</option>
-				        <option value="FEMALE">FEMALE</option>
+	                <select class="" ng-model="gender" material-select watch>
+				        <option ng-repeat="value in select.choices">{{value}}</option>
 				    </select>
 	                <label for='gender'>Gender</label>
 	              </div>
@@ -56,50 +49,12 @@
 	                <label for='dob'>Date of Birth</label>
 	              </div>
 	            </div>
-	            <div class='row'>
-	              <div class='input-field col s12 m4 l4'>
-	                <select ng-model="country" material-select watch>
-				        <option>NIGERIA</option>
-				    </select>
-	                <label for='country'>Country</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <select ng-model="state" material-select watch>
-				        <option>ABIA</option>
-				    </select>
-	                <label for='country'>State</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <select ng-model="city" material-select watch>
-				        <option>ABA</option>
-				    </select>
-	                <label for='city'>City</label>
-	              </div>
-	            </div>
-	            <div class='row'>
-	              <div class='input-field col s12 m4 l4'>
-	                <select ng-model="bank" material-select watch>
-				        <option>Access Bank</option>
-				    </select>
-	                <label for='bank'>Bank Name</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="accountName" />
-	                <label for='accountName'>Account Name</label>
-	              </div>
-	              <div class='input-field col s12 m4 l4'>
-	                <input type='text' ng-model="accountNumber" />
-	                <label for='accountNumber'>Account Number</label>
-	              </div>
-	            </div>
 	            <center>
 	              <div class='row'>
-	                <button type='submit' class='col s12 btn btn-large waves-effect green'>Register</button>
+	                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect green'>Register</button>
 	              </div>
 	            </center>
 	          </form>
 	        </div>
 	      </div>
 	    </center>
-	</main>
-</div>

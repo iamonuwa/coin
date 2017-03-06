@@ -4,13 +4,6 @@
 	var gulp = require('gulp');
 	var browserSync = require('browser-sync').create();
 	var sass = require('gulp-sass');
-	var concat = require('gulp-concat');
-	var filter = require('gulp-filter');
-	var mainBowerFiles = require('main-bower-files');
-	var uglify = require('gulp-uglify');
-	var rename = require('gulp-rename');
-	var runSequence = require('run-sequence');
-	var replace = require('gulp-replace');
 	var jasmineBrowser = require('gulp-jasmine-browser');
 
 	gulp.task('serve', ['sass'], function() {
@@ -43,6 +36,8 @@
 	    .pipe(jasmineBrowser.specRunner())
 	    .pipe(jasmineBrowser.server({port: 8888}));
 	});
+
+	
 	gulp.task('default', ['watch', 'serve'])
 
 

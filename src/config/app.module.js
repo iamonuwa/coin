@@ -8,7 +8,8 @@ angular.module('coin', [
 		'ui.router',
 		'firebase',
 		'ui.materialize',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    'multiStepForm'
 	])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'cfpLoadingBarProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
 	$urlRouterProvider.otherwise('/');
@@ -17,15 +18,16 @@ angular.module('coin', [
   cfpLoadingBarProvider.includeSpinner = true;
 
 	$stateProvider
-		.state('app', {
+		.state('public', {
 			abstract: true,
-			templateUrl: 'views/templates/ui.templates.views.client.html',
+			templateUrl: 'views/templates/public.templates.views.client.html',
 			pageTitle: "Welcome to Coin Exchange",
 		})
-		.state('app.index', {
-			url: '/',
-			templateUrl: 'views/index.views.client.html',
-			pageTitle: "Welcome to Coin Exchange",
+    .state('public.signin', {
+      url: '/signin',
+      templateUrl: 'views/auth/signin.auth.views.client.html',
+      pageTitle: 'Signin into Account',
+      public: true,
       resolve: {
         // controller will not be loaded until $waitForSignIn resolves
         // Auth refers to our $firebaseAuth wrapper in the factory below
@@ -34,7 +36,39 @@ angular.module('coin', [
           return Auth.$waitForSignIn();
         }]
       }
-		})
+    })
+    .state('public.register', {
+      url: '/register',
+      templateUrl: 'views/auth/register.auth.views.client.html',
+      pageTitle: 'Register Account',
+      public: true,
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app', {
+      abstract: true,
+      templateUrl: 'views/templates/ui.templates.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+    })
+    .state('app.index', {
+      url: '/',
+      templateUrl: 'views/index.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
     .state('app.dashboard',{
       url: '/dashboard',
       templateUrl: 'views/dashboard.views.client.html',
@@ -77,34 +111,6 @@ angular.module('coin', [
         }]
       }
     })
-    .state('app.signin', {
-      url: '/signin',
-      templateUrl: 'views/auth/signin.auth.views.client.html',
-      pageTitle: 'Signin into Account',
-      public: true,
-      resolve: {
-        // controller will not be loaded until $waitForSignIn resolves
-        // Auth refers to our $firebaseAuth wrapper in the factory below
-        "currentAuth": ["Auth", function(Auth) {
-          // $waitForSignIn returns a promise so the resolve waits for it to complete
-          return Auth.$waitForSignIn();
-        }]
-      }
-    })
-    .state('app.register', {
-      url: '/register',
-      templateUrl: 'views/auth/register.auth.views.client.html',
-      pageTitle: 'Register Account',
-      public: true,
-      resolve: {
-        // controller will not be loaded until $waitForSignIn resolves
-        // Auth refers to our $firebaseAuth wrapper in the factory below
-        "currentAuth": ["Auth", function(Auth) {
-          // $waitForSignIn returns a promise so the resolve waits for it to complete
-          return Auth.$waitForSignIn();
-        }]
-      }
-    })
 }])
 .run(["$rootScope", "$state", 'Auth', function($rootScope, $state, Auth) {
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
@@ -133,6 +139,14 @@ angular.module('coin', [
   return firebase.database().ref();
 })
 
+.factory('currency', ['$http', function ($http) {
+    var CURRENCY_ENDPOINT = 'http://apilayer.net/api/live?access_key=ae1c9e6e5ee4f5b211256b8a8c1b7713';
+
+  return {
+
+  };
+}])
+
 
 //Prevent click if href="#"
 function preventClickDirective() {
@@ -150,11 +164,12 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef) {
 
      Auth.$onAuthStateChanged(function($firebaseUser) {
       if ($firebaseUser != null) {
-        $scope.uid = $firebaseUser.uid;
-        var item = DatabaseRef.child('users').child($firebaseUser.uid);
-        item.once('value').then(function (snapshot) {
-          $scope.user = snapshot.val().displayName;
-        })
+        $scope.id = $firebaseUser.uid;
+        $scope.user = $firebaseUser.displayName;
+        // var item = DatabaseRef.child('users').child($firebaseUser.uid);
+        // item.once('value').then(function (snapshot) {
+        //   $scope.user = snapshot.val().displayName;
+        // })
         $scope.loggedIn = true;
       } else {
         $scope.loggedIn = false;
@@ -178,11 +193,11 @@ function LoginController($scope, $state, $firebaseAuth) {
     var auth = $firebaseAuth();
       auth.$signInWithEmailAndPassword($scope.email, $scope.password).then(function (response) {
         if(response.emailVerified){
-            Materialize.toast("Welcome "+ response.email , 3000);
+            Materialize.toast("Welcome "+ response.displayName , 3000);
               $state.go('app.dashboard');
         }
         else{
-          Materialize.toast("Welcome " + response.email + ", Please verify your account.", 3000);
+          Materialize.toast("Welcome " + response.displayName + ", Please verify your account.", 3000);
           $state.go('app.dashboard');
         }
       }).catch(function (error) {
@@ -192,7 +207,46 @@ function LoginController($scope, $state, $firebaseAuth) {
   }
 }
 
-RegisterController.inject = ['$scope', 'currentAuth'];
-function RegisterController($scope, currentAuth) {
-  // body...
+RegisterController.inject = ['$scope', '$firebaseAuth', '$state', 'DatabaseRef'];
+function RegisterController($scope, $firebaseAuth, $state, DatabaseRef) {
+
+  $scope.create_account = function () {
+    var auth = $firebaseAuth();
+    $scope.displayName = $scope.lastname + ' ' + $scope.firstname + ' ' + $scope.othername;
+
+    if($scope.password !== $scope.confirm_password){
+      Materialize.toast("Passwords do not match.")
+    }
+    else{
+        auth.$createUserWithEmailAndPassword($scope.email, $scope.password).then(function ($firebaseUser) {
+          $firebaseUser.updateProfile({
+            displayName: $scope.displayName
+          }).then(function () {
+            DatabaseRef
+                    .child('users')
+                    .child($firebaseUser.uid)
+                    .set({
+                      firstname: $scope.firstname,
+                      lastname: $scope.lastname,
+                      othername: $scope.othername,
+                      country: $scope.country,
+                      state: $scope.state,
+                      city: $scope.city,
+                      phone: $scope.phone,
+                      email: $scope.email,
+                      gender: $scope.gender,
+                      dob: $scope.dob,
+                      bankName: $scope.bank,
+                      accountName: $scope.accountName,
+                      accountNumber: $scope.accountNumber
+                    });
+            $firebaseUser.sendEmailVerification();
+            Materialize.toast("Your account has been created! Please check your mail to verify your account", 3000);
+            $state.go('app.dashboard');
+          }, function (error) {
+            Materialize.toast(error, 3000);
+          })
+        })
+    }
+  }
 }

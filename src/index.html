@@ -9,12 +9,13 @@
     </head>
     <body>
       <ui-view></ui-view>
-      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
       <script src="assets/vendor/angular/angular.js"></script>
       <script src="assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
       <script src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+      <script src="assets/vendor/angular-multi-step-form/dist/browser/angular-multi-step-form.min.js"></script>
       <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
       <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
       <script>
@@ -27,7 +28,12 @@
           messagingSenderId: "805707518666"
         };
         firebase.initializeApp(config);
-
+        $('.button-collapse').sideNav({
+              menuWidth: 300, // Default is 240
+              closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            }
+          );
+        $('.collapsible').collapsible();
       </script>
 
       <script src="config/app.module.js"></script>
