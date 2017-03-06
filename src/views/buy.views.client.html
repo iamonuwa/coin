@@ -1,17 +1,18 @@
 <div class="section">
 	<main ng-controller="buyController">
 	    <center>
-	  <div class="section"></div>
-  	<div class="indigo-text">
-  		<button class="waves-effect waves-block btn" ng-click="exchange = !exchange">
-	  		{{ toggle_application_btn }}
-  		</button>
-	</div>
-	      <div class="section"></div>
-
 	      <div class="container">
-
-			<div ng-show="exchange" ng-init="loadAccount()">
+				<div class="m12 s12 col">
+				                <div class="card-panel deep-blue darken-1">
+				                    <div class="row">
+				                        <div class="col l12 white-text">
+				                            <h5>Don't Miss a Thing</h5>
+				                            <h6>A weekly digest of top resources for designers.</h6>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+			<div ng-init="loadAccount()">
 				<h4>Currency Exchange Form</h4>
 				<form ng-submit="apply()" name="application">
 			        <div class="row">
@@ -31,6 +32,7 @@
 							    <label>Buying</label>
 							</div>
 			        	</div>
+			        </div>
 			        	<div class="row">
 				        	<div class="col s12 m6 l6">
 				        		<div input-field>
@@ -72,28 +74,11 @@
 								</div>
 				        	</div>
 				        </div>
-			        </div>
-			        <div class="right">
-			        	<button type="submit" class="waves-effect waves-light waves-block btn">Apply for Exchange</button>
-			        </div>
+				        <div class="right">
+				        	<button type="submit" class="waves-effect waves-light waves-block btn">Apply for Exchange</button>
+				        </div>
+				        <div class="section"></div>
 				</form>
-			</div>
-			<div class="row" ng-init="getMyApplications()">
-				<div class="col s12 m12 l4" ng-show="applications == null">
-					<div class="card">
-					    <div class="card-image waves-effect waves-block waves-light">
-					      <img class="activator" src="assets/images/transaction_not_found.png">
-					    </div>
-					    <!-- <div class="card-content">
-					      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-					      <p class="right"><a href="#">This is a link</a></p>
-					    </div>
-					    <div class="card-reveal">
-					      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-					      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-					    </div> -->
-					  </div>
-				</div>
 			</div>
 	      </div>
 	    </center>

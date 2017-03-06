@@ -302,8 +302,15 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
         accountName: $scope.application.accountName,
         bankName: $scope.application.bankName, 
     }
-    var newData = DatabaseRef.child('applications').push().key();
-    console.log(newData);
+    var newKey = DatabaseRef.child('applications').push().key;
+    var submit = {};
+    submit['/applications/' + newKey] = data;
+    DatabaseRef.update(submit).then(function () {
+      Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+    })
+    .catch(function (error) {
+      Materialize.toast(error, 3000);
+    })
     // DatabaseRef.child('application/'+ timestamp)
     //             .set({
                   
