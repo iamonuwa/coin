@@ -8,14 +8,16 @@ angular.module('coin', [
 		'ui.router',
 		'firebase',
 		'ui.materialize',
-    'angular-loading-bar',
+    'chieffancypants.loadingBar',
     'multiStepForm'
 	])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'cfpLoadingBarProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
 	$urlRouterProvider.otherwise('/');
-	$locationProvider.hashPrefix('');
+	// $locationProvider.hashPrefix('');
 
-  cfpLoadingBarProvider.includeSpinner = true;
+  // cfpLoadingBarProvider.includeSpinner = true;
+  cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+  cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
 
 	$stateProvider
 		.state('public', {
@@ -167,10 +169,6 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef) {
       if ($firebaseUser != null) {
         $scope.id = $firebaseUser.uid;
         $scope.user = $firebaseUser.displayName;
-        // var item = DatabaseRef.child('users').child($firebaseUser.uid);
-        // item.once('value').then(function (snapshot) {
-        //   $scope.user = snapshot.val().displayName;
-        // })
         $scope.loggedIn = true;
       } else {
         $scope.loggedIn = false;
@@ -311,17 +309,6 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
     .catch(function (error) {
       Materialize.toast(error, 3000);
     })
-    // DatabaseRef.child('application/'+ timestamp)
-    //             .set({
-                  
-    //               // pic: currency_type($scope.buying)
-    //             }).then(function () {
-    //               Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
-    //               $scope.exchange = false;
-    //             })
-    //             .catch(function (error) {
-    //               Materialize.toast(error, 3000);
-    //             });
   }
 }
 
