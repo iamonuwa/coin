@@ -292,55 +292,55 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
     $scope.currency = function (value) {
       switch(value){
         case "NAIRA":
-          return 100;
+          return 10;
           break;
         case "BTC":
-          return 100;
+          return 20;
           break;
         case "PAYZA":
-          return 100;
+          return 30;
           break;
         case "PERFECT MONEY":
-          return 100;
+          return 40;
           break;
         case "WEB MONEY":
-          return 100;
+          return 50;
           break;
         case "PAYPAL":
-          return 100;
+          return 60;
           break;
         default:
           return 0;
       }
     }
-
+    $scope.getTotalAmount = function () {
+      return $scope.form.units * $scope.currency($scope.form.buying);
+    }
   $scope.apply = function () {
     var timestamp = new Date().getTime();
-
-    console.log($scope.form.$valid);
 
     // if(($scope.application.selling == undefined) || ($scope.application.buying == undefined) || ($scope.application.units == undefined)){
     //   Materialize.toast("All fields are required.", 3000);
     // }
     // else{
-    //   var data = {
-    //       selling: $scope.application.selling,
-    //       buying: $scope.application.buying,
-    //       units: $scope.application.units,
-    //       amount: $scope.application.amount + ' ' + $scope.application.buying,
-    //       accountNumber: $scope.application.accountNumber,
-    //       accountName: $scope.application.accountName,
-    //       bankName: $scope.application.bankName, 
-    //   }
-    //   var newKey = DatabaseRef.child('users/'+ uid +'/applications').push().key;
-    //   var submit = {};
-    //   submit['users/'+ uid +'/applications/' + newKey] = data;
-    //   DatabaseRef.update(submit).then(function () {
-    //     Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
-    //   })
-    //   .catch(function (error) {
-    //     Materialize.toast(error, 3000);
-    //   })
+      var data = {
+          selling: $scope.form.selling,
+          buying: $scope.form.buying,
+          units: $scope.form.units,
+          amount: $scope.getTotalAmount() + ' ' + $scope.form.buying,
+          accountNumber: $scope.form.accountNumber,
+          accountName: $scope.form.accountName,
+          bankName: $scope.form.bankName, 
+      }
+      var newKey = DatabaseRef.child('users/'+ uid +'/applications').push().key;
+      var submit = {};
+      submit['users/'+ uid +'/applications/' + newKey] = data;
+      DatabaseRef.update(submit).then(function () {
+        Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+      })
+      .catch(function (error) {
+        Materialize.toast(error, 3000);
+      })
     // }
   }
 }
