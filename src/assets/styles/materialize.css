@@ -3096,7 +3096,7 @@ nav {
 .navbar-fixed {
   position: relative;
   height: 56px;
-  z-index: 997; }
+  z-index: 9999; }
   .navbar-fixed nav {
     position: fixed; }
 

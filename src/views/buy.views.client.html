@@ -4,11 +4,11 @@
 	      <div class="container">
 			<div ng-init="loadAccount()">
 				<h4>Currency Exchange Form</h4>
-				<form ng-submit="apply()" name="application">
+				<form ng-submit="apply()" name="form">
 			        <div class="row">
 			        	<div class="col s12 m6 l6">
 			        		<div input-field>
-							    <select ng-model="application.selling" material-select watch>
+							    <select ng-model="form.selling" material-select watch>
 								    <option ng-repeat="value in money">{{value}}</option>
 							    </select>
 							    <label>Selling</label>
@@ -16,7 +16,7 @@
 			        	</div>
 			        	<div class="col s12 m6 l6">
 			        		<div input-field>
-							    <select ng-model="application.buying" material-select watch>
+							    <select ng-model="form.buying" material-select watch>
 							    	<option ng-repeat="value in money">{{value}}</option>
 							    </select>
 							    <label>Buying</label>
@@ -27,7 +27,7 @@
 				        	<div class="col s12 m6 l6">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="application.units" required>
+									    <input type="text" ng-model="form.units" ng-change="test()" ng-model-options="{ debounce: 250 }">
 									    <label>Worth</label>
 									</div>
 								</div>
@@ -35,9 +35,8 @@
 				        	<div class="col s12 m6 l6">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-bind="application.units" ng-model="application.amount" disabled>
-									    <label>Amount to Buy</label>
-									</div>
+									    <label>Amount to Buy</label><span> {{ getTotalAmount()}}</span>
+									    </div>
 								</div>
 				        	</div>
 				        </div>
@@ -45,27 +44,27 @@
 				        	<div class="col s12 m6 l4">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="application.bankName" hidden>
+									    <input type="text" ng-model="form.bankName" hidden>
 									</div>
 								</div>
 				        	</div>
 				        	<div class="col s12 m6 l4">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="application.accountNumber" hidden>
+									    <input type="text" ng-model="form.accountNumber" hidden>
 									</div>
 								</div>
 				        	</div>
 				        	<div class="col s12 m6 l4">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="application.accountName" hidden>
+									    <input type="text" ng-model="form.accountName" hidden>
 									</div>
 								</div>
 				        	</div>
 				        </div>
 				        <div class="right">
-				        	<button type="submit" class="waves-effect waves-light waves-block btn">Apply for Exchange</button>
+				        	<button type="submit" class="waves-effect waves-light waves-block btn" ng-disabled="form.$invalid">Apply for Exchange</button>
 				        </div>
 				        <div class="section"></div>
 				</form>
