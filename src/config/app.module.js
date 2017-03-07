@@ -9,7 +9,7 @@ angular.module('coin', [
 		'firebase',
 		'ui.materialize',
     'chieffancypants.loadingBar',
-    'multiStepForm'
+    'ngMap'
 	])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'cfpLoadingBarProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
 	$urlRouterProvider.otherwise('/');
@@ -229,9 +229,7 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef) {
                       firstname: $scope.firstname,
                       lastname: $scope.lastname,
                       othername: $scope.othername,
-                      country: $scope.country,
-                      state: $scope.state,
-                      city: $scope.city,
+                      location: $scope.address,
                       phone: $scope.phone,
                       email: $scope.email,
                       gender: $scope.gender,
