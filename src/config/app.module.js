@@ -188,8 +188,8 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef) {
 
 }
 
-LoginController.inject = ['$scope', '$state', '$firebaseAuth'];
-function LoginController($scope, $state, $firebaseAuth) {
+LoginController.inject = ['$scope', '$state', '$firebaseAuth', 'Auth'];
+function LoginController($scope, $state, $firebaseAuth, Auth) {
   $scope.login = function () {
     var auth = $firebaseAuth();
       auth.$signInWithEmailAndPassword($scope.email, $scope.password).then(function (response) {
@@ -198,7 +198,8 @@ function LoginController($scope, $state, $firebaseAuth) {
               $state.go('app.index');
         }
         else{
-          Materialize.toast("Welcome " + response.displayName + ", Please verify your account.", 3000);
+          Materialize.toast("Login failed. Please verify your account.", 3000);
+          Auth.$signOut();
           $state.go('app.index');
         }
       }).catch(function (error) {
@@ -293,7 +294,6 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
   $scope.apply = function () {
     var timestamp = new Date().getTime();
     var data = {
-        uid: uid,
         selling: $scope.application.selling,
         buying: $scope.application.buying,
         units: $scope.application.units,
@@ -302,9 +302,9 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
         accountName: $scope.application.accountName,
         bankName: $scope.application.bankName, 
     }
-    var newKey = DatabaseRef.child('applications').push().key;
+    var newKey = DatabaseRef.child('users/'+ uid +'/applications').push().key;
     var submit = {};
-    submit['/applications/' + newKey] = data;
+    submit['users/'+ uid +'/applications/' + newKey] = data;
     DatabaseRef.update(submit).then(function () {
       Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
     })
