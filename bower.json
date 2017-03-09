@@ -20,6 +20,7 @@
     "angular-ui-router": "^0.4.2",
     "jquery": "^3.0.0",
     "ngmap": "^1.17.8",
-    "angular-messages": "ng-messages#*"
+    "angular-messages": "ng-messages#*",
+    "angular-loading-bar": "^0.9.0"
   }
 }

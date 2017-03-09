@@ -9,15 +9,14 @@
 			        	<div class="col s12 m6 l6">
 			        		<div input-field>
 							    <select ng-model="form.selling" material-select watch>
-								    <option ng-repeat="value in money">{{value}}</option>
+								    <option ng-repeat="value in money" value="{{ value.currency }}">{{ value.currency }}</option>
 							    </select>
 							    <label>Selling</label>
 							</div>
 			        	</div>
 			        	<div class="col s12 m6 l6">
 			        		<div input-field>
-							    <select ng-model="form.buying" material-select watch>
-							    	<option ng-repeat="value in money">{{value}}</option>
+							    <select ng-model="form.buying" ng-options="currency.currency for currency in money track by currency.unit" material-select watch>
 							    </select>
 							    <label>Buying</label>
 							</div>
@@ -27,7 +26,7 @@
 				        	<div class="col s12 m6 l6">
 				        		<div input-field>
 								    <div input-field>
-									    <input type="text" ng-model="form.units" ng-change="test()" ng-model-options="{ debounce: 250 }">
+									    <input type="text" ng-model="form.worth">
 									    <label>Worth</label>
 									</div>
 								</div>

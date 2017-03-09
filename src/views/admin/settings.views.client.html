@@ -1,0 +1,84 @@
+<div class="section">
+		<main ng-controller="settingsController as settingsCtrl">
+		      <div class="container">
+		      	<div class="row">
+		      		<div class="col s12 m6" ng-init="loadConfiguration()">
+					      <h5 class="indigo-text center">Update Application Details</h5>
+				          <form class="col s12" ng-submit="updateConfiguration()">
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="config.application_name" />
+				                <label for='application_name'>Application Name</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="config.facebook_link" />
+				                <label for='facebook_link'>Facebook</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="config.twitter_link" />
+				                <label for='twitter_ink'>Twitter</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="config.google_link" />
+				                <label for='google_link'>Google Plus</label>
+				              </div>
+				            </div>
+				              <div class='row'>
+				                <button type='submit' class='btn waves-effect indigo'>Update Application Settings</button>
+				              </div>
+				          </form>
+			        </div>
+			        <div class="col s12 m6"  ng-init="loadExchangeRates()">
+					      <h5 class="indigo-text center">Update Exchange Rates</h5>
+				          <form class="col s12" ng-submit="updateExchangeRates()">
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="exchange_rates[0].unit" />
+				                <label for='naira'>Naira</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="exchange_rates[1].unit" />
+				                <label for='BitCoin'>BitCoin</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="exchange_rates[2].unit" />
+				                <label for='payza'>Payza</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="exchange_rates[3].unit" />
+				                <label for='perfect_money'>Perfect Money</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="exchange_rates[4].unit" />
+				                <label for='web_money'>Web Money</label>
+				              </div>
+				            </div>
+				            <div class='row'>
+				              <div class='input-field col s12'>
+				                <input type="text" ng-model="exchange_rates[5].unit" />
+				                <label for='paypal'>Paypal</label>
+				              </div>
+				            </div>
+				              <div class='row'>
+				                <button type='submit' class='btn waves-effect indigo'>Update Exchange Rates</button>
+				              </div>
+				          </form>
+			        </div>
+		        </div>
+		      </div>
+		</main>
+	</div>
