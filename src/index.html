@@ -4,8 +4,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="assets/styles/materialize.css" media="all">
-      <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" media="all"/>
-      <title ng-bind="'Coin Exchange ' + $state.pageTitle">Coin Exchange</title>
+      <link rel="stylesheet" type="text/css" href="assets/vendor/angular-loading-bar/build/loading-bar.min.css" media="all"/>
+      <title ng-bind="'MIKAFO GLOBAL ENTERPRISE ' + $state.pageTitle">MIKAFO GLOBAL ENTERPRISE</title>
     </head>
     <body>
       <ui-view></ui-view>
@@ -17,8 +17,7 @@
       <script src="assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="assets/vendor/angular-messages/angular-messages.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
-      <script src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
-      <script src="assets/vendor/angular-multi-step-form/dist/browser/angular-multi-step-form.min.js"></script>
+      <script src='assets/vendor/angular-loading-bar/build/loading-bar.min.js'></script>
       <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
       <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
       <script>
@@ -31,11 +30,6 @@
           messagingSenderId: "805707518666"
         };
         firebase.initializeApp(config);
-        // (function($){
-        //     $(function(){
-        //         $('.button-collapse').sideNav();
-        //     }); 
-        // })(jQuery); 
       </script>
 
       <script src="config/app.module.js"></script>

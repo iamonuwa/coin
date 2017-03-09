@@ -1,19 +1,26 @@
 <div id="loading-bar-container"></div>
 <div class="navbar-fixed" ng-controller="navbarController as navbarCtrl">
   <nav role="navigation">
-    <div class="container nav-wrapper">
-      <a class="brand-logo" ui-sref="app.index">Logo</a>
+    <div class="nav-wrapper">
+      <a class="brand-logo" ui-sref="app.index">MGE</a>
       <div>
         <ul class="right hide-on-med-and-down">
-          <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Buy Coins</a></li>
+          <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
+            <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
+            <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
+            <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.signin">Sign In</a></li>
+            <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.register">Sign Up</a></li>
             <li ng-show="loggedIn"><a class="waves-effect waves-teal" ng-click="logout()">Sign Out</a></li>
-            <li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="public.signin">Sign In</a></li>
-            <li ng-show="!loggedIn"><a class="waves-effect waves-teal" ui-sref="public.register">Sign Up</a></li>
         </ul>
         <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-closeonclick="true"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="side-nav" style="transform: translateX(0px);">
-          <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.buy">Buy</a></li>
-            <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
+          <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
+          <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
+            <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="public.signin">Why Us</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="public.signin">FAQ</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="public.signin">Contact Us</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="public.signin">Buy and Sell</a></li>
             <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ng-click="logout()">Sign Out</a></li>
             <li ng-show="!loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="public.signin">Sign In</a></li>
             <li ng-show="!loggedIn" ui-sref-active="active"><a ui-sref="public.register" class="waves-effect waves-light">Sign Up</a></li>
@@ -27,16 +34,16 @@
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
+                <h5 class="white-text">MGE</h5>
                 <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
               </div>
               <div class="col l4 offset-l2 s12 hide-on-med-and-down">
                 <h5 class="white-text">Links</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">FAQ</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Why Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Buy and Sell</a></li>
                 </ul>
               </div>
             </div>
