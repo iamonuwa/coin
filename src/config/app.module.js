@@ -76,6 +76,58 @@ angular.module('coin', [
         }]
       }
     })
+    .state('app.faq', {
+      url: '/frequently-asked-questions',
+      templateUrl: 'views/faq.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app.why', {
+      url: '/why-us',
+      templateUrl: 'views/why.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app.contact', {
+      url: '/contact-us',
+      templateUrl: 'views/contact.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app.buy_sell', {
+      url: '/buy-and-sell',
+      templateUrl: 'views/buy_sell.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
     .state('app.dashboard',{
       url: '/dashboard',
       templateUrl: 'views/dashboard.views.client.html',
