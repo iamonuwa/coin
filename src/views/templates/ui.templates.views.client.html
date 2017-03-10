@@ -6,7 +6,7 @@
       <div>
         <ul class="right hide-on-med-and-down">
           <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
-            <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
+            <!-- <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li> -->
             <li ng-show="loggedIn && toggle_role"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
             <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.signin">Sign In</a></li>
             <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.register">Sign Up</a></li>
@@ -15,7 +15,7 @@
         <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-closeonclick="true"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="side-nav" style="transform: translateX(0px);">
           <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
-          <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
+          <!-- <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li> -->
             <li ng-show="loggedIn && toggle_role"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
             <li><a class="waves-effect waves-teal " ui-sref="app.why">Why Us</a></li>
             <li><a class="waves-effect waves-teal " ui-sref="app.faq">FAQ</a></li>
@@ -40,10 +40,10 @@
               <div class="col l4 offset-l2 s12 hide-on-med-and-down">
                 <h5 class="white-text">Links</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">FAQ</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Why Us</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Buy and Sell</a></li>
+                  <li><a class="grey-text text-lighten-3" ui-sref="app.faq">FAQ</a></li>
+                  <li><a class="grey-text text-lighten-3" ui-sref="app.why">Why Us</a></li>
+                  <li><a class="grey-text text-lighten-3" ui-sref="app.contact">Contact Us</a></li>
+                  <li><a class="grey-text text-lighten-3" ui-sref="app.buy_sell">Buy and Sell</a></li>
                 </ul>
               </div>
             </div>

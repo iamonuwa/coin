@@ -1,6 +1,17 @@
+
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+  	"exchange_rates" : {
+  		".read" : true,
+  		".write" : "auth != null"
+  	},
+  	"users" : {
+  		".read" : "auth != null",
+  		".write" : "auth != null"
+  	},
+  	"application_configuration" : {
+  		".read" : true,
+  		".write" : "auth != null"
+  	}
   }
 }

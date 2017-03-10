@@ -1,19 +1,20 @@
 {
-  "name": "coin",
-  "description": "Money Exchange Automation Solution",
+  "name": "mikafo",
+  "description": "Mikafo Global Enterprise",
   "main": "gulpfile.js",
   "authors": [
     "Onuwa Nnachi Isaac <matrix4u2002@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/iamonuwa/coin",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "app/assets/vendor",
     "test",
-    "tests"
+    "tests",
+    "src/assets/vendor"
   ],
   "dependencies": {
     "angular": "^1.6.2",
@@ -22,5 +23,13 @@
     "ngmap": "^1.17.8",
     "angular-messages": "ng-messages#*",
     "angular-loading-bar": "^0.9.0"
-  }
+  },
+  "keywords": [
+    "crypotocurrency",
+    "foreign",
+    "exchange",
+    "financial",
+    "app",
+    "finance"
+  ]
 }
