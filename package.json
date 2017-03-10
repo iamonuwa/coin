@@ -1,7 +1,7 @@
 {
-  "name": "coin",
+  "name": "mikafo",
   "version": "1.0.0",
-  "description": "Money Exchange Automation Solution",
+  "description": "Mikafo Global Enterprise",
   "main": "gulpfile.js",
   "scripts": {
     "test": "gulp test"
@@ -25,5 +25,24 @@
   },
   "dependencies": {
     "service-worker-precache": "^1.0.0"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamonuwa/coin.git"
+  },
+  "keywords": [
+    "crypotocurrency",
+    "foreign",
+    "exchange",
+    "financial",
+    "app",
+    "finance"
+  ],
+  "bugs": {
+    "url": "https://github.com/iamonuwa/coin/issues"
+  },
+  "homepage": "https://github.com/iamonuwa/coin#readme"
 }

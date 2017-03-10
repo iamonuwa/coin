@@ -128,20 +128,6 @@ angular.module('coin', [
         }]
       }
     })
-    .state('app.dashboard',{
-      url: '/dashboard',
-      templateUrl: 'views/dashboard.views.client.html',
-      pageTitle: 'Coin Exchange Application Form',
-      public: false,
-      resolve: {
-        // controller will not be loaded until $waitForSignIn resolves
-        // Auth refers to our $firebaseAuth wrapper in the factory below
-        "currentAuth": ["Auth", function(Auth) {
-          // $waitForSignIn returns a promise so the resolve waits for it to complete
-          return Auth.$requireSignIn();
-        }]
-      }
-    })
     .state('app.profile', {
       url: '/u/:id',
       templateUrl: 'views/profile.views.client.html',
@@ -219,6 +205,7 @@ angular.module('coin', [
   });
 }])
 
+.controller('indexController', IndexController)
 .controller('navbarController', NavbarController)
 .controller('loginController', LoginController)
 .controller('registerController', RegisterController)
@@ -241,6 +228,12 @@ function preventClickDirective() {
     // link: link
   }
   return directive;
+}
+
+IndexController.inject = ['$scope', 'DatabaseRef', '$firebaseObject'];
+function IndexController($scope, DatabaseRef, $firebaseObject) {
+    var ref = DatabaseRef.child('exchange_rates');
+    $scope.exchange_rates = $firebaseObject(ref);
 }
 
 NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth', 'DatabaseRef', '$firebaseObject'];
