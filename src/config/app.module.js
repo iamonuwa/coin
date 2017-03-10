@@ -76,6 +76,58 @@ angular.module('coin', [
         }]
       }
     })
+    .state('app.faq', {
+      url: '/frequently-asked-questions',
+      templateUrl: 'views/faq.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app.why', {
+      url: '/why-us',
+      templateUrl: 'views/why.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app.contact', {
+      url: '/contact-us',
+      templateUrl: 'views/contact.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
+    .state('app.buy_sell', {
+      url: '/buy-and-sell',
+      templateUrl: 'views/buy_sell.views.client.html',
+      pageTitle: "Welcome to Coin Exchange",
+      resolve: {
+        // controller will not be loaded until $waitForSignIn resolves
+        // Auth refers to our $firebaseAuth wrapper in the factory below
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForSignIn returns a promise so the resolve waits for it to complete
+          return Auth.$waitForSignIn();
+        }]
+      }
+    })
     .state('app.dashboard',{
       url: '/dashboard',
       templateUrl: 'views/dashboard.views.client.html',
@@ -182,24 +234,6 @@ angular.module('coin', [
   return firebase.database().ref();
 })
 
-.factory('api_calls', ['$http', 'DatabaseRef', function ($http, DatabaseRef) {
-
-  return {
-    getExchangeRates: function (currency) {
-      // DatabaseRef
-    },
-
-    getConfiguration: function () {
-      var item = DatabaseRef.child('application_configuration');
-      item.once('value').then(function (snapshot) {
-        return snapshot.val();
-      })
-    }
-
-  };
-}])
-
-
 //Prevent click if href="#"
 function preventClickDirective() {
   var directive = {
@@ -221,15 +255,15 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $fireba
       $scope.id = $firebaseUser.uid;
         $scope.user = $firebaseUser.displayName;
         var item = DatabaseRef.child('users').child($firebaseUser.uid);
-        item.on('value', function (snapshot) {
+          item.once('value').then(function (snapshot) {
           $scope.role = snapshot.val().type;
-          if($scope.role === 'admin'){
+          if($scope.role == 'admin'){
             $scope.toggle_role = true;
           }
           else{
             $scope.toggle_role = false;
           }
-        })
+        }) 
         $scope.loggedIn = true;
       } else {
         $scope.loggedIn = false;
