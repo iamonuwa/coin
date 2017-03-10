@@ -254,24 +254,16 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $fireba
       $scope.exchange_rates = $firebaseObject(ref);
       $scope.id = $firebaseUser.uid;
         $scope.user = $firebaseUser.displayName;
-        var ref = DatabaseRef.child('users').child($firebaseUser.uid);
-        $scope.role = $firebaseObject(ref);
-        // if(user.type == 'admin'){
-        //   $scope.toggle_role = true;
-        // }
-        // else{
-        //   $scope.toggle_role = false;
-        // }
-
-        // item.on('value', function (snapshot) {
-        //   $scope.role = snapshot.val().type;
-        //   if($scope.role === 'admin'){
-        //     $scope.toggle_role = true;
-        //   }
-        //   else{
-        //     $scope.toggle_role = false;
-        //   }
-        // })
+        var item = DatabaseRef.child('users').child($firebaseUser.uid);
+          item.once('value').then(function (snapshot) {
+          $scope.role = snapshot.val().type;
+          if($scope.role == 'admin'){
+            $scope.toggle_role = true;
+          }
+          else{
+            $scope.toggle_role = false;
+          }
+        }) 
         $scope.loggedIn = true;
       } else {
         $scope.loggedIn = false;
