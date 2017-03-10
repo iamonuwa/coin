@@ -1,11 +1,11 @@
 <div id="loading-bar-container"></div>
 <div class="navbar-fixed" ng-controller="navbarController as navbarCtrl">
   <nav role="navigation">
-    <div class="nav-wrapper">
+    <div class="nav-wrapper container">
       <a class="brand-logo" ui-sref="app.index">MGE</a>
       <div>
         <ul class="right hide-on-med-and-down">
-          <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
+          <li ng-show="loggedIn && toggle_role"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
             <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
             <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
             <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.signin">Sign In</a></li>
@@ -16,11 +16,11 @@
         <ul id="nav-mobile" class="side-nav" style="transform: translateX(0px);">
           <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
           <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li>
-            <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
-            <li><a class="waves-effect waves-teal " ui-sref="public.signin">Why Us</a></li>
-            <li><a class="waves-effect waves-teal " ui-sref="public.signin">FAQ</a></li>
-            <li><a class="waves-effect waves-teal " ui-sref="public.signin">Contact Us</a></li>
-            <li><a class="waves-effect waves-teal " ui-sref="public.signin">Buy and Sell</a></li>
+            <li ng-show="loggedIn && role"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="app.why">Why Us</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="app.faq">FAQ</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="app.contact">Contact Us</a></li>
+            <li><a class="waves-effect waves-teal " ui-sref="app.buy_sell">Buy and Sell</a></li>
             <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ng-click="logout()">Sign Out</a></li>
             <li ng-show="!loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="public.signin">Sign In</a></li>
             <li ng-show="!loggedIn" ui-sref-active="active"><a ui-sref="public.register" class="waves-effect waves-light">Sign Up</a></li>
