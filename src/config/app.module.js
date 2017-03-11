@@ -236,8 +236,8 @@ function IndexController($scope, DatabaseRef, $firebaseObject) {
     $scope.exchange_rates = $firebaseObject(ref);
 }
 
-NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth', 'DatabaseRef', '$firebaseObject'];
-function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $firebaseObject) {
+NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth', 'DatabaseRef', '$firebaseObject', '$http'];
+function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $firebaseObject, $http) {
 
     $scope.openModal = false;
 
@@ -261,7 +261,11 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $fireba
       } else {
         $scope.loggedIn = false;
       }
-    })
+    });
+
+     $scope.send_email = function () {
+       
+     }
   
     $scope.logout = function() {
       Auth.$signOut();
@@ -344,8 +348,8 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef, Auth) {
   }
 }
 
-BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth'];
-function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
+BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth', '$http'];
+function BuyController($scope, DatabaseRef, $firebaseObject, Auth, $http) {
   var uid = Auth.$getAuth().uid;
 
   $scope.getMyApplications = function () {
@@ -364,6 +368,7 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
       $scope.form.bankName = snapshot.val().bankName;
       $scope.form.accountName = snapshot.val().accountName;
       $scope.form.accountNumber = snapshot.val().accountNumber;
+      $scope.form.email = snapshot.val().email;
     }) 
   }
   
@@ -390,6 +395,8 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
           buying: $scope.form.buying.currency,
           units: $scope.form.worth,
           amount: $scope.getTotalAmount(),
+          name: $scope.form.firstname + ' ' + $scope.form.lastname + ' ' + $scope.form.othername,
+          email: $scope.form.email,
           accountNumber: $scope.form.accountNumber,
           accountName: $scope.form.accountName,
           bankName: $scope.form.bankName, 
@@ -399,6 +406,15 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
       submit['users/'+ uid +'/applications/' + newKey] = data;
       DatabaseRef.update(submit).then(function () {
         Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+        $http({
+              method: 'POST',
+              url: 'https://mailer-endpoint.herokuapp.com/send-email',
+              data: data,
+              headers: {
+                'Accept': 'application/json',
+                'content-type': 'application/json'
+              }
+          });
         $scope.form.selling = '';
         $scope.form.buying = '';
         $scope.form.worth = '';
@@ -415,11 +431,7 @@ function SettingsController($scope, DatabaseRef, Auth, $firebaseObject) {
   $scope.loadConfiguration = function () {
     var ref = firebase.database().ref('application_configuration');
     var config = $firebaseObject(ref);
-    // console.log("Loading");
-    // config.$loaded().then(function () {
-      // console.log("Loaded");
       $scope.config = config;
-    // })
   }
 
   $scope.loadExchangeRates = function () {
