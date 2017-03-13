@@ -221,6 +221,22 @@ angular.module('coin', [
   return firebase.database().ref();
 })
 
+.factory('endpoints', ['$http', function ($http) {
+  return {
+    send_email : function (data) {
+      return $http({
+              method: 'POST',
+              url: 'http://localhost:5000/send-email',
+              data: data,
+              headers: {
+                'Accept': 'application/json',
+                'content-type': 'application/json'
+              }
+          });
+    }
+  }
+}])
+
 //Prevent click if href="#"
 function preventClickDirective() {
   var directive = {
@@ -348,8 +364,8 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef, Auth) {
   }
 }
 
-BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth', '$http'];
-function BuyController($scope, DatabaseRef, $firebaseObject, Auth, $http) {
+BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth', '$http', 'endpoints'];
+function BuyController($scope, DatabaseRef, $firebaseObject, Auth, $http, endpoints) {
   var uid = Auth.$getAuth().uid;
 
   $scope.getMyApplications = function () {
@@ -395,35 +411,29 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth, $http) {
           buying: $scope.form.buying.currency,
           units: $scope.form.worth,
           amount: $scope.getTotalAmount(),
-          name: $scope.form.firstname + ' ' + $scope.form.lastname + ' ' + $scope.form.othername,
           email: $scope.form.email,
           accountNumber: $scope.form.accountNumber,
           accountName: $scope.form.accountName,
           bankName: $scope.form.bankName, 
       }
+      // var mailer = 
       var newKey = DatabaseRef.child('users/'+ uid +'/applications').push().key;
       var submit = {};
       submit['users/'+ uid +'/applications/' + newKey] = data;
-      DatabaseRef.update(submit).then(function () {
-        Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
-        $http({
-              method: 'POST',
-              url: 'https://mailer-endpoint.herokuapp.com/send-email',
-              data: data,
-              headers: {
-                'Accept': 'application/json',
-                'content-type': 'application/json'
-              }
-          });
-        $scope.form.selling = '';
-        $scope.form.buying = '';
-        $scope.form.worth = '';
+      endpoints.send_email(data).then(function (response) {
+        DatabaseRef.update(submit).then(function () {
+          
+          Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+          $scope.form.selling = '';
+          $scope.form.buying = '';
+          $scope.form.worth = '';
+        })
+        .catch(function (error) {
+          Materialize.toast(error, 3000);
+        })
       })
-      .catch(function (error) {
-        Materialize.toast(error, 3000);
-      })
+    }
   }
-}
 
 SettingsController.inject = ['$scope', 'DatabaseRef', 'Auth', '$firebaseObject'];
 function SettingsController($scope, DatabaseRef, Auth, $firebaseObject) {
@@ -484,7 +494,6 @@ function UsersController($scope, DatabaseRef, $firebaseObject, Auth) {
       var item = DatabaseRef.child('users');
       item.once('value').then(function (snapshot) {
         $scope.users = snapshot.val();
-        console.log($scope.users);
       })
   }
 
