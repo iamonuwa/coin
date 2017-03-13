@@ -4,68 +4,99 @@
 	      <div class="container">
 			<div ng-init="loadAccount()">
 				<h4>Currency Exchange Form</h4>
-				<form ng-submit="apply()" name="form">
-			        <div class="row">
-			        	<div class="col s12 m6 l6">
-			        		<div input-field>
-							    <select ng-model="form.selling" material-select watch>
-								    <option ng-repeat="value in money" value="{{ value.currency }}">{{ value.currency }}</option>
-							    </select>
-							    <label>Selling</label>
-							</div>
-			        	</div>
-			        	<div class="col s12 m6 l6">
-			        		<div input-field>
-							    <select ng-model="form.buying" ng-options="currency.currency for currency in money track by currency.unit" material-select watch>
-							    </select>
-							    <label>Buying</label>
-							</div>
-			        	</div>
-			        </div>
-			        	<div class="row">
-				        	<div class="col s12 m6 l6">
-				        		<div input-field>
-								    <div input-field>
-									    <input type="text" ng-model="form.worth">
-									    <label>Worth</label>
-									</div>
-								</div>
-				        	</div>
-				        	<div class="col s12 m6 l6">
-				        		<div input-field>
-								    <div input-field>
-									    <label>Amount to Buy</label><span> {{ getTotalAmount()}}</span>
-									    </div>
-								</div>
-				        	</div>
-				        </div>
+				<form ng-submit="apply()" name="form" class="z-depth-5">
+			        <div class="container">
+					        <div class="section"></div>
+					        <div class="section"></div>
 				        <div class="row">
-				        	<div class="col s12 m6 l4">
+				        	<div class="col s12 m6 l6">
 				        		<div input-field>
-								    <div input-field>
-									    <input type="text" ng-model="form.bankName" hidden>
-									</div>
+								    <select ng-model="form.selling" material-select watch>
+									    <option ng-repeat="value in money" value="{{ value.currency }}">{{ value.currency }}</option>
+								    </select>
+								    <label>Selling</label>
 								</div>
 				        	</div>
-				        	<div class="col s12 m6 l4">
+				        	<div class="col s12 m6 l6">
 				        		<div input-field>
-								    <div input-field>
-									    <input type="text" ng-model="form.accountNumber" hidden>
-									</div>
-								</div>
-				        	</div>
-				        	<div class="col s12 m6 l4">
-				        		<div input-field>
-								    <div input-field>
-									    <input type="text" ng-model="form.accountName" hidden>
-									</div>
+								    <select ng-model="form.buying" ng-options="currency.currency for currency in money track by currency.unit" material-select watch>
+								    </select>
+								    <label>Buying</label>
 								</div>
 				        	</div>
 				        </div>
-				        <div class="right">
-				        	<button type="submit" class="waves-effect waves-light waves-block btn" ng-disabled="form.$invalid">Apply for Exchange</button>
+				        	<div class="row">
+					        	<div class="col s12 m6 l6">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.worth">
+										    <label>Worth</label>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l6">
+					        		<div input-field>
+									    <div input-field>
+										    <label>Amount to Buy</label><span> {{ getTotalAmount()}}</span>
+										    </div>
+									</div>
+					        	</div>
+					        </div>
+					        <div class="row">
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.firstname" hidden>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.lastname" hidden>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.othername" hidden>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.email" hidden>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.bankName" hidden>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.accountNumber" hidden>
+										</div>
+									</div>
+					        	</div>
+					        	<div class="col s12 m6 l4">
+					        		<div input-field>
+									    <div input-field>
+										    <input type="text" ng-model="form.accountName" hidden>
+										</div>
+									</div>
+					        	</div>
+					        </div>
+					        	<button type="submit" class="waves-effect waves-light waves-block btn right" ng-disabled="form.$invalid">Apply for Exchange</button>
+					        <div class="section"></div>
+					        <div class="section"></div>
 				        </div>
-				        <div class="section"></div>
 				</form>
 			</div>
 	      </div>

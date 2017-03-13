@@ -221,6 +221,22 @@ angular.module('coin', [
   return firebase.database().ref();
 })
 
+.factory('endpoints', ['$http', function ($http) {
+  return {
+    send_email : function (data) {
+      return $http({
+              method: 'POST',
+              url: 'http://localhost:5000/send-email',
+              data: data,
+              headers: {
+                'Accept': 'application/json',
+                'content-type': 'application/json'
+              }
+          });
+    }
+  }
+}])
+
 //Prevent click if href="#"
 function preventClickDirective() {
   var directive = {
@@ -236,8 +252,8 @@ function IndexController($scope, DatabaseRef, $firebaseObject) {
     $scope.exchange_rates = $firebaseObject(ref);
 }
 
-NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth', 'DatabaseRef', '$firebaseObject'];
-function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $firebaseObject) {
+NavbarController.inject = ['$rootScope', '$scope', '$state', 'Auth', 'DatabaseRef', '$firebaseObject', '$http'];
+function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $firebaseObject, $http) {
 
     $scope.openModal = false;
 
@@ -261,7 +277,11 @@ function NavbarController($rootScope, $scope, $state, Auth, DatabaseRef, $fireba
       } else {
         $scope.loggedIn = false;
       }
-    })
+    });
+
+     $scope.send_email = function () {
+       
+     }
   
     $scope.logout = function() {
       Auth.$signOut();
@@ -344,8 +364,8 @@ function RegisterController($scope, $firebaseAuth, $state, DatabaseRef, Auth) {
   }
 }
 
-BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth'];
-function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
+BuyController.inject = ['$scope', 'DatabaseRef', '$firebaseObject', 'Auth', '$http', 'endpoints'];
+function BuyController($scope, DatabaseRef, $firebaseObject, Auth, $http, endpoints) {
   var uid = Auth.$getAuth().uid;
 
   $scope.getMyApplications = function () {
@@ -364,6 +384,7 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
       $scope.form.bankName = snapshot.val().bankName;
       $scope.form.accountName = snapshot.val().accountName;
       $scope.form.accountNumber = snapshot.val().accountNumber;
+      $scope.form.email = snapshot.val().email;
     }) 
   }
   
@@ -390,24 +411,29 @@ function BuyController($scope, DatabaseRef, $firebaseObject, Auth) {
           buying: $scope.form.buying.currency,
           units: $scope.form.worth,
           amount: $scope.getTotalAmount(),
+          email: $scope.form.email,
           accountNumber: $scope.form.accountNumber,
           accountName: $scope.form.accountName,
           bankName: $scope.form.bankName, 
       }
+      // var mailer = 
       var newKey = DatabaseRef.child('users/'+ uid +'/applications').push().key;
       var submit = {};
       submit['users/'+ uid +'/applications/' + newKey] = data;
-      DatabaseRef.update(submit).then(function () {
-        Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
-        $scope.form.selling = '';
-        $scope.form.buying = '';
-        $scope.form.worth = '';
+      endpoints.send_email(data).then(function (response) {
+        DatabaseRef.update(submit).then(function () {
+          
+          Materialize.toast("Your application has been submitted. We'll get back to you in the next 24 hours", 3000);
+          $scope.form.selling = '';
+          $scope.form.buying = '';
+          $scope.form.worth = '';
+        })
+        .catch(function (error) {
+          Materialize.toast(error, 3000);
+        })
       })
-      .catch(function (error) {
-        Materialize.toast(error, 3000);
-      })
+    }
   }
-}
 
 SettingsController.inject = ['$scope', 'DatabaseRef', 'Auth', '$firebaseObject'];
 function SettingsController($scope, DatabaseRef, Auth, $firebaseObject) {
@@ -415,11 +441,7 @@ function SettingsController($scope, DatabaseRef, Auth, $firebaseObject) {
   $scope.loadConfiguration = function () {
     var ref = firebase.database().ref('application_configuration');
     var config = $firebaseObject(ref);
-    // console.log("Loading");
-    // config.$loaded().then(function () {
-      // console.log("Loaded");
       $scope.config = config;
-    // })
   }
 
   $scope.loadExchangeRates = function () {
@@ -472,7 +494,6 @@ function UsersController($scope, DatabaseRef, $firebaseObject, Auth) {
       var item = DatabaseRef.child('users');
       item.once('value').then(function (snapshot) {
         $scope.users = snapshot.val();
-        console.log($scope.users);
       })
   }
 
