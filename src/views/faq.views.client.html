@@ -1,0 +1,12 @@
+<div class="section" ng-controller="pagesController as pagesCtrl">
+	<div class="container">
+		<div class="row">
+            <ul class="collapsible popout" data-collapsible="accordion" watch>
+                <li ng-repeat="single in collapsibleElements">
+                    <div class="collapsible-header">{{single.title}}</div>
+                    <div class="collapsible-body"><p>{{single.content}}</p></div>
+                </li>
+            </ul>
+		</div>
+	</div>
+</div>

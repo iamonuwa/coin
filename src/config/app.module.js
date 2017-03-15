@@ -212,6 +212,7 @@ angular.module('coin', [
 .controller('buyController', BuyController)
 .controller('usersController', UsersController)
 .controller('settingsController', SettingsController)
+.controller('pagesController', PagesController)
 
 .directive('a', preventClickDirective)
 .factory("Auth", ['$firebaseAuth', function($firebaseAuth) {
@@ -498,4 +499,37 @@ function UsersController($scope, DatabaseRef, $firebaseObject, Auth) {
   }
 
 
+}
+
+PagesController.inject = ['$scope'];
+function PagesController($scope) {
+    $scope.collapsibleElements = [{
+        title: 'First',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Second',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Third',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Four',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Five',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Five',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Five',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Five',
+        content: 'Lorem ipsum dolor sit amet.'
+    },{
+        title: 'Five',
+        content: 'Lorem ipsum dolor sit amet.'
+    }
+  ];
 }
