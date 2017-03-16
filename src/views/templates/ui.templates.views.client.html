@@ -8,6 +8,9 @@
           <li ng-show="loggedIn"><a class="waves-effect waves-teal" ui-sref="app.buy">Apply for Exchange</a></li>
             <!-- <li ng-show="loggedIn" ui-sref-active="active"><a class="waves-effect waves-light" ui-sref="app.profile({id})">{{ user }}</a></li> -->
             <li ng-show="loggedIn && toggle_role"><a class="waves-effect waves-teal" ui-sref="app.settings">Application Settings</a></li>
+            <li><a class="waves-effect waves-teal" ui-sref="app.faq">FAQ</a></li>
+            <li><a class="waves-effect waves-teal" ui-sref="app.why">Why Us</a></li>
+            <li><a class="waves-effect waves-teal" ui-sref="app.contact">Contact Us</a></li>
             <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.signin">Sign In</a></li>
             <li ng-show="!loggedIn"><a class="waves-effect waves-teal btn" ui-sref="public.register">Sign Up</a></li>
             <li ng-show="loggedIn"><a class="waves-effect waves-teal" ng-click="logout()">Sign Out</a></li>
@@ -33,25 +36,18 @@
         <footer class="page-footer">
           <div class="container">
             <div class="row">
-              <div class="col l6 s12">
+              <div class="col l4 s12">
                 <h5 class="white-text">Leadexchange</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              <p class="white-text"> Leadxchange registered in Nigeria provides exclusive e-currency top-up and withdrawal services from small to large amounts. We have launched our business in 2016, and we are always looking for new ways to help our customers exchange their money from the e-wallets.</p>
               </div>
-              <div class="col l4 offset-l2 s12 hide-on-med-and-down">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" ui-sref="app.faq">FAQ</a></li>
-                  <li><a class="grey-text text-lighten-3" ui-sref="app.why">Why Us</a></li>
-                  <li><a class="grey-text text-lighten-3" ui-sref="app.contact">Contact Us</a></li>
-                  <!-- <li><a class="grey-text text-lighten-3" ui-sref="app.buy_sell">Buy and Sell</a></li> -->
-                </ul>
+              <div class="col l4 s12">
+                <a title="1Broker.com" target="_blank" href="https://1broker.com/?r=17113"><img src="https://1broker.com/img/banner1-728x90.png" alt="1Broker Banner" style="width: 728px"/></a>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
             © 2017 MIKAFO GLOBAL ENTERPRISE
-            <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
             </div>
           </div>
         </footer>
