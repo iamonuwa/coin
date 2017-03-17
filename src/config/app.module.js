@@ -227,7 +227,7 @@ angular.module('coin', [
     send_email : function (data) {
       return $http({
               method: 'POST',
-              url: 'http://mailer-endpoint.herokuapp.com/send-email',
+              url: 'https://mailer-endpoint.herokuapp.com/send-email',
               data: data,
               headers: {
                 'Accept': 'application/json',
